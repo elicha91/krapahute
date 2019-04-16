@@ -1,0 +1,36 @@
+/*=======================BANDEAU=======================*/
+.bandeau_acdc {
+  position: relative;
+  line-height: 0;
+  img {z-index: 1;}
+  .hover {
+    opacity: 1;
+    transition-property: opacity;
+    transition-duration: 0.4s;
+  }
+  .hover:hover {
+    opacity: 0.6;
+  }
+
+  .titre {
+    position: absolute;
+    top: 46%;
+    z-index: 2;
+    text-align: center;
+    background-color: $color-acdcdark;
+    color: $color-blanc;
+    text-transform: uppercase;
+    font-family: 'Capture', cursive;
+    font-size: calc(2vw + 20px);
+    padding-right: calc(1vw + 15px);
+    padding-left: calc(1vw + 15px);
+  }
+  .logo {
+    position: absolute;
+    top: 24%;
+    left: 42vw;
+    z-index: 3;
+    width: 16vw;
+  }
+}
+/*=======================END BANDEAU=======================*/

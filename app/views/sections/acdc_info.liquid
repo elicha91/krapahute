@@ -1,0 +1,134 @@
+---
+{
+  "name": "Informations",
+  "class": "",
+  "icon": "image_text",
+  "keep_name": true,
+  "keep_icon": true,
+  "settings": [
+  ],
+  "blocks": [
+    {
+      "name": "Bloc Info",
+      "type": "cell_image",
+      "keep_icon": true,
+      "keep_name": true,
+      "settings": [
+        {
+          "label": "Pictogramme",
+          "id": "picture",
+          "type": "image_picker"
+        },
+        {
+          "label": "Nom du Bloc",
+          "id": "picture_alt",
+          "type": "text"
+        },
+        {
+          "label": "Texte",
+          "id": "content",
+          "type": "text",
+          "html": true,
+          "nb_rows": 10
+        },
+        {
+          "label": "Lien",
+          "id": "url",
+          "type": "text"
+        },
+        {
+          "label": "Couleur(hexa)",
+          "id": "colour",
+          "type": "text"
+        }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "Informations",
+    "category": "Boutique",
+    "settings" : {
+    },
+    "blocks": [
+      {
+        "type": "cell_image",
+        "settings" : {
+          "content":  "Livraison gratuite dès 99€",
+          "picture":  "https://via.placeholder.com/400x400.png?text=ici+votre+image",
+          "picture_alt":  "Livraison Krapahute",
+          "url":  "www.krapahute.com",
+          "colour":  "#8c7776"
+        }
+      },
+      {
+        "type": "cell_image",
+        "settings" : {
+          "content":  "Livraison gratuite dès 99€",
+          "picture":  "https://via.placeholder.com/400x400.png?text=ici+votre+image",
+          "picture_alt":  "Livraison Krapahute",
+          "url":  "www.krapahute.com",
+          "colour":  "#8c7776"
+        }
+      },
+      {
+        "type": "cell_image",
+        "settings" : {
+          "content":  "Livraison gratuite dès 99€",
+          "picture":  "https://via.placeholder.com/400x400.png?text=ici+votre+image",
+          "picture_alt":  "Livraison Krapahute",
+          "url":  "www.krapahute.com",
+          "colour":  "#8c7776"
+        }
+      },
+      {
+        "type": "cell_image",
+        "settings" : {
+          "content":  "Livraison gratuite dès 99€",
+          "picture":  "https://via.placeholder.com/400x400.png?text=ici+votre+image",
+          "picture_alt":  "Livraison Krapahute",
+          "url":  "www.krapahute.com",
+          "colour":  "#8c7776"
+        }
+      },
+      {
+        "type": "cell_image",
+        "settings" : {
+          "content":  "Livraison gratuite dès 99€",
+          "picture":  "https://via.placeholder.com/400x400.png?text=ici+votre+image",
+          "picture_alt":  "Livraison Krapahute",
+          "url":  "www.krapahute.com",
+          "colour":  "#8c7776"
+        }
+      }
+    ]
+  }],
+  "default": {
+    "settings" : {
+    },
+    "blocks": []
+  }
+}
+---
+<div class="container-fluid my-5">
+  <div class="row {{css_banner}}">
+    <div class="col-12">
+      <div class="container acdc_info px-0 mp-sm-auto">
+          {% for cell in section.blocks %}
+            {% assign next_block = section.blocks[forloop.index] %}
+                <div class="block">
+                  {% include 'block_debug' %}
+                  <a href="{{ cell.settings.url}}">
+                    <div class="picto" style="background-color:{{cell.settings.colour}};">
+                      <div class="sous_picto">
+                        <img src="{{cell.settings.picture}}" alt="{{cell.settings.picture_alt}}" class="img-fluid">
+                      </div>
+                    </div>
+                  </a>
+                  <div class="d-none d-md-block">{{ cell.settings.content }}</div>
+                </div>
+          {%endfor%}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

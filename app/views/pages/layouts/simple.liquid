@@ -1,0 +1,48 @@
+---
+title: Simple
+is_layout: false
+---
+{% extends 'layouts/default' %}
+
+{% block content %}
+  <div class="row  bg-secondary">
+
+  {% if contents.slides.size > 0%}
+    <div class=" text-center d-none d-sm-block" id="slider">
+      <div class="carousel slide" id="main-carousel" data-ride="carousel">
+        <div class="carousel-inner">
+        {% for slide in contents.slides%}
+          <div class="{%if forloop.index0 == 0%}active{%endif%} carousel-item">
+            <a href="{{slide.link}}">
+              <img src="{{slide.picture.url}}" alt="{{slide.name}}" class="w-100">
+            </a>
+          </div>
+        {% endfor %}
+        </div>
+      {% if contents.slides.size > 1%}
+      <a class="carousel-control-prev" href="#main-carousel" role="button" data-slide="prev">
+         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+         <span class="sr-only">Previous</span>
+       </a>
+       <a class="carousel-control-next" href="#main-carousel" role="button" data-slide="next">
+         <span class="carousel-control-next-icon" aria-hidden="true"></span>
+         <span class="sr-only">Next</span>
+       </a>
+      {% endif %}
+      </div>
+    </div>
+      <div class="container d-sm-none">
+        <div class="row">
+          {% for slide in contents.slides%}
+          <div class="col-12 p-sm-0 pt-3 pt-sm-3">
+            <img src="{{slide.picture.url}}" alt="{{slide.name}}" class="w-100">
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+  {% endif %}
+  </div>
+
+  {% block main %}
+  {% endblock %}
+{% endblock %}

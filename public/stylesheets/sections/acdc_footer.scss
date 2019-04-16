@@ -1,0 +1,38 @@
+
+/*=======================FOOTER=======================*/
+.footer {
+  overflow: hidden;
+  .imgfooter {margin-left: -5px; width: calc(100% + 10px); height:auto;}
+}
+.acdcfooter {
+  background-color: #8c7676;
+  margin-top: -2px;
+  font-family: Catamaran, arial;
+  .widget {
+    font-size: 16px;
+    color: #fff;
+    text-align: center;
+    border-left: 2px solid white;
+    &:first-child {border: none;}
+    h3 { font-family: Capture, cursive; text-transform: uppercase; letter-spacing: 2px;}
+    a {color: white;}
+    a:hover {color: $color-acdclight;text-decoration: none;}
+    p {margin: 0}
+  }
+  .subchild {margin: 0;padding: 0 10%;}
+  .image {width: 23%; margin: auto; padding-bottom: 10px; border-bottom: 4px transparent solid}
+  .image:hover {border-bottom: 4px white solid}
+}
+  .info {
+    width: 100%;
+    background-color: black;
+    margin-top: 40px;
+    padding: 10px;
+    text-align: center;
+    color: white;
+}
+
+@media screen and (max-width: 999px) {
+  .acdcfooter .widget {border: none;}
+}
+/*=======================END FOOTER=======================*/

@@ -1,0 +1,71 @@
+---
+{
+  "name": "Texte SEO",
+  "class": "",
+  "icon": "text",
+  "keep_name": true,
+  "keep_icon": true,
+  "settings": [
+    {
+      "label": "Texte H1",
+      "id": "texte_h1",
+      "type": "text",
+      "html": true
+    },
+    {
+         "label": "Texte H2",
+         "id": "texte_h2",
+         "type": "text",
+         "html": true
+    },
+   {
+        "label": "Texte P1",
+        "id": "texte_p1",
+        "type": "text",
+        "html": true
+    },
+    {
+         "label": "Texte P2",
+         "id": "texte_p2",
+         "type": "text",
+         "html": true
+     },
+    {
+         "label": "Texte P3",
+         "id": "texte_p3",
+         "type": "text",
+         "html": true
+     }
+  ],
+  "blocks": [],
+
+  "presets": [{
+    "name": "Texte SEO",
+    "category": "Accueil",
+    "settings": {
+        "texte_h1": "VÊTEMENTS MILITAIRES - EQUIPEMENT MILITAIRES - AIRSOFT & AIRGUN SURPLUS MILITAIRE - VETEMENTS MILITAIRES ET EQUIPEMENTS Le spécialiste du vêtement militaire et de l'équipement militaire.",
+        "texte_h2": "Krapahute.com propose au militaire une large gamme de vêtements militaire, de treillis et d'équipements militaire dans un camouflage de choix : camouflage centre europe, woodland, désert et bien d'autres encore.",
+        "texte_p1": "Au delà des professionnels de la défense française et de l'armée de terre, le site krapahute.com c'est aussi le spécialiste du filet de camouflage. Que ce soit pour équiper les chasseurs, les pratiquants du airsoft ou tout simplement les particuliers qui souhaitent habiller leur pergola, vous trouverez tout ce qu'il vous faut à travers un nombre important de filet camouflage de premier choix comme ceux de la marque Miltec.",
+        "texte_p2": "Sac à dos militaire et sac militaire pour vous accompagner sur tous les terrains. Comme tout bon surplus militaire qui se respecte, Krapahute c'est aussi un grand choix de matériel militaire incontournables comme le gilet tactique, la tente militaire ou tout simplement le casque militaire. Besoin d'un insigne militaire ? Krapahute.com vous propose tout un large panel d'insignes en fonction de votre besoin.",
+        "texte_p3": "Du matériel militaire mais pas que… Au delà de l'activité surplus, Krapahute.com vous offre ses services au travers d'un service client de qualité,d'un service après-vente à votre écoute et d'un catalogue de produits très vaste pouvant répondre aux attentes de tout bon aventurier ou krapahuteur adeptes des sorties outdoor comme la randonnée, le camping ou encore le trekking."
+    },
+    "blocks": [
+    ]
+  }],
+
+  "default": {
+    "settings" : {
+    },
+    "blocks": []
+  }
+}
+---
+       <div class="container">
+          <div class="row seo_text">
+              <h1 class="col-lg-12">{{ section.settings.texte_h1 }}</h1>
+              <h2 class="col-lg-12">{{ section.settings.texte_h2 }}</h2>
+              <div class="col-lg-4 col-md-12 text">{{ section.settings.texte_p1 }}</div>
+              <div class="col-lg-4 col-md-12 text">{{ section.settings.texte_p2 }}</div>
+              <div class="col-lg-4 col-md-12 text">{{ section.settings.texte_p3 }}</div>
+       </div>
+

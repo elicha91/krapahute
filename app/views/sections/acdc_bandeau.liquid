@@ -1,0 +1,86 @@
+---
+{
+  "name": "Bandeau ACDC",
+  "class": "",
+  "icon": "image_text",
+  "keep_icon": true,
+  "settings": [
+    {
+      "label": "Bandeau ACDC",
+      "id": "section_name",
+      "type": "text"
+    },
+    {
+        "label": "Texte Gauche",
+        "id": "texte_gauche",
+        "type": "text"
+    },
+    {
+        "label": "Texte Droite",
+        "id": "texte_droite",
+        "type": "text"
+    },
+    {
+        "label": "Image Gauche (960/560px)",
+        "id": "picture_left",
+        "type": "image_picker"
+    },
+    {
+        "label": "Url Gauche",
+        "id": "url_gauche",
+        "type": "text"
+    },
+    {
+        "label": "Image Droite (960/560px)",
+        "id": "picture_right",
+        "type": "image_picker"
+    },
+    {
+        "label": "Url Droite",
+        "id": "url_droite",
+        "type": "text"
+    },
+    {
+        "label": "Image Logo",
+        "id": "picture_logo",
+        "type": "image_picker"
+    }
+  ],
+  "blocks": [],
+
+  "presets": [{
+    "name": "Bandeau ACDC",
+    "category": "Accueil",
+    "settings": {
+      "section_name": "Bandeau",
+      "texte_gauche": "Le magasin",
+      "texte_droite": "Bar - Tirs - CQB",
+      "picture_left" : "https://via.placeholder.com/960x560.png?text=ici+votre+image",
+      "picture_right" : "https://via.placeholder.com/960x560.png?text=ici+votre+image",
+      "picture_logo" : "https://via.placeholder.com/400x400.png?text=ici+votre+logo"
+    },
+    "blocks": [
+    ]
+  }],
+
+  "default": {
+    "settings" : {
+    },
+    "blocks": []
+  }
+}
+---
+          <div class="row bandeau_acdc my-3 my-md-5">
+            <a href="{{ section.settings.url_gauche }}" class="col-12 col-md-6 m-0 p-0 hover">
+                <h2 class="titre w-100" style="padding-right:9vw;">{{ section.settings.texte_gauche }}</h2>
+                <img src="{{section.settings.picture_left}}" alt="{{section.settings.picture_left_alt}}" class="img_acdc_left w-100">
+            </a>
+            <a href="{{ section.settings.url_droite }}" class="col-12 col-md-6 m-0 p-0 hover">
+                <h2 class="titre w-100" style="padding-left:9vw;">{{ section.settings.texte_droite }}</h2>
+                <img src="{{section.settings.picture_right}}" alt="{{section.settings.picture_right_alt}}" class="img_acdc_right w-100">
+            </a>
+            <div class="logo d-none d-md-block">
+                <img src="{{section.settings.picture_logo}}" alt="{{section.settings.picture_logo_alt}}" class="img_acdc_logo w-100">
+            </div>
+          </div>
+

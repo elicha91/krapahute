@@ -1,0 +1,73 @@
+@font-face {
+  font-family: 'Capture';
+  src: url('../fonts/Capture.ttf');
+}
+
+@font-face {
+  font-family: 'Catamaran';
+  src: url('../fonts/Catamaran-Regular.ttf');
+}
+
+/*==============================================
+ELISE ♥
+==============================================*/
+$color-marron: #8c7676; /*rgb(140,118, 18)*/
+$color-acdcdark: #809f8e; /*rgb(128,159, 42)*/
+$color-acdclight : #a3d2bc; /*rgb(163,210,188)*/
+$color-blanc : #ffffff; /*rgb(255,255,55)*/
+$color-gris: #3c3c3c; /*rgb(60, 60, 60)*/
+$color-grislight: #e9ecef;
+$interblock: 60px; /*pour margin-top*/
+
+.locomotive-section {overflow: hidden;}
+.marg0 {margin: 0px;}
+.padd0 {padding: 0px;}
+a {color: $color-acdcdark; text-decoration: none;}
+a:hover {text-decoration: none;}
+
+
+/*=======================SECTION=======================*/
+.section_titre {
+  margin-top: $interblock;
+  width: 100%;
+  text-align: center;
+  color: $color-gris;
+  font-family: 'Capture', cursive;
+  text-transform: uppercase;
+  font-size: 4vw;
+  line-height: 1;
+}
+
+/*Encadrement des articles*/
+.product-thumbnail:hover {border-color: $color-grislight;}
+.card-title {color: $color-gris;}
+.card-title:hover {color: $color-acdcdark; text-decoration: none;}
+.btn-primary {background-color: $color-acdclight; border: none; margin-top: 20px; padding: 16px;}
+.btn-primary:hover {background-color: $color-acdcdark;}
+.btn-outline-acdc {color: $color-acdclight; background-color: transparent; border-color: $color-acdclight; padding: 24px; } /*nav slider*/
+.btn-outline-acdc:hover {color: white; background-color: $color-acdclight; border-color: $color-acdclight; } /*nav slider*/
+
+@media screen and (max-width: 999px) {
+  .section_titre {
+    font-size: 8vw;
+  }
+}
+
+/*=======================END SECTION=======================*/
+/*=======================SECTION PROMOTION=======================*/
+.promotion {
+  .btn-outline-acdc {
+    border: 1px solid $color-acdclight;
+    border-radius: 0.2rem;
+    font-family: 'Capture', cursive;
+    text-transform: uppercase;
+    font-size: 1em;
+    margin-bottom: 20px;
+  }
+  .currency-list {
+    display: inline;
+    padding-right: 5px;
+  }
+}
+/*=======================END SECTION PROMOTION=======================*/
+

@@ -1,0 +1,92 @@
+---
+title: Cart
+checkout: checkout
+is_layout: false
+
+---
+
+{% extends 'layouts/base' %}
+{% block 'body' %}
+  <div class="page shadow">
+    <header>
+      {% block header %}
+        {% global_section 'header', id:'cart_header'%}
+      {% endblock %}
+    </header>
+    <main>
+      <div class="container-fluid">
+        {% include 'store_notifications' %}
+      </div>
+      {% case page.handle %}
+        {% when 'cart_login' %}
+          {% assign cart_step = 2 %}
+        {% when 'cart_address' %}
+          {% assign cart_step = 2 %}
+        {% when 'cart_checkout' %}
+          {% assign cart_step = 3 %}
+        {% when 'cart_end' %}
+          {% assign cart_step = 4 %}
+        {% else %}
+          {% assign cart_step = 1 %}
+      {% endcase %}
+      {% if store.cart == false or store.cart.lines.count == 0 %}
+        {% action 'redirect to cart index' %}
+          redirectTo('cart_index');
+        {% endaction %}
+      {% endif %}
+      {% block 'main' %}
+        <div class="row ">
+          <div class="col-12">
+            {% global_section 'cart_breadcrumb' %}
+            <div class="pt-4 pb-4">
+              {% section 'cart' %}
+            </div>
+            {% sections_dropzone %}
+          </div>
+        </div>
+      {% endblock %}
+    </main>
+  </div>
+{% endblock %}
+
+
+
+{% comment %}
+    <div class="row justify-content-center  pt-4 pb-4">
+      <div class="col-12 col-xl-10">
+
+        {% include 'cart_breadcrumbs' with cart_step%}
+        <h1 class="h3 text-dark font-weight-bold">
+          {% editable_text "cart_title", hint: "Cart title in homepage" %}
+          My shopping cart
+          {% endeditable_text %}
+        </h1>
+
+        {% if store.cart.lines.count != null and store.cart.lines.count != 0 %}
+          {% block main_old %}
+          {% endblock %}
+        {% else %}
+          <div class="container" data-shopinvader-container id="cart-content">
+            <div class="row">
+              <div class="col-12">
+                {% editable_text "cart_empty", hint: "Cart empty" %}
+                Your shopping cart is empty :(
+                {% endeditable_text %}
+                <div class="text-center">
+                  <a href="{% path_to home%}" class="btn btn-lg btn-primary">
+                    {{'cart_continue_shopping' | translate}}
+                    <i class="fa fa-chevron-right"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endcomment %}
+{% block 'footer' %}
+{% endblock %}

@@ -1,0 +1,99 @@
+---
+title: Home page
+published: true
+handle: home
+sections_dropzone_content: >
+  [
+    {
+      "type": "carousel",
+      "settings": {
+        "section_name": "Main carousel",
+        "identifier": "main",
+        "display_control": "true",
+        "full_width": false,
+        "display_sm": true,
+        "page_border": true
+      },
+      "blocks": [
+        {
+          "type": "list_item",
+          "settings": {
+            "title": "Slide #1",
+            "picture": "/images/slide-1.png",
+            "link": "",
+            "align_caption": "center"
+          }
+        },
+        {
+          "type": "list_item",
+          "settings": {
+            "title": "Slide #2",
+            "picture": "/images/slide-2.png",
+            "link": "",
+            "caption": "<h5>Slide #2</h5><p>Maecenas varius nibh a maximus vehicula</p>",
+            "align_caption": "end"
+          }
+        }
+      ]
+    },
+    {
+      "type": "category_products_list",
+      "settings": {
+        "category_id": "202",
+        "text_position": "start",
+        "content": "<h2><b>Dining</b> Room</h1>Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        "slider": false,
+        "item_limit": 5
+      },
+      "blocks": []
+    },
+    {
+      "type": "category_products_list",
+      "settings": {
+        "category_id": "199",
+        "text_position": "end",
+        "content": "<h2><b>Dining</b> Room</h1>Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        "slider": false,
+        "item_limit": 5
+      },
+      "blocks": []
+    },
+
+    {
+       "type": "promotion",
+       "settings": {
+      "promotion_titre" : "Nos Promotions",
+      "category_id": "202",
+      "slider": true,
+      "item_limit": "5",
+      "url_promotions": "https://google.com"
+       }
+    },
+    {
+       "type": "bandeau_acdc",
+       "settings": {
+       "section_name": "Bandeau ACDC",
+       "margin": "xl",
+       "texte_gauche": "Découvrir le magasin",
+       "texte_droite": "Bar Couloir de tirs CQB",
+       "picture_left" : "http://www.krapahute.com/media/wysiwyg/hp/1/left.jpg",
+       "picture_right" : "http://www.krapahute.com/media/wysiwyg/hp/1/right.jpg",
+       "picture_logo" : "http://www.krapahute.com/media/wysiwyg/hp/1/logo_acdcP3.png"
+       },
+       "blocks": []
+      },
+
+      {
+       "type": "seo_text",
+       "settings": {
+          "texte_h1": "VÊTEMENTS MILITAIRES - EQUIPEMENT MILITAIRES - AIRSOFT & AIRGUN SURPLUS MILITAIRE - VETEMENTS MILITAIRES ET EQUIPEMENTS Le spécialiste du vêtement militaire et de l'équipement militaire.",
+          "texte_h2": "Krapahute.com propose au militaire une large gamme de vêtements militaire, de treillis et d'équipements militaire dans un camouflage de choix : camouflage centre europe, woodland, désert et bien d'autres encore.",
+          "texte_p1": "Au delà des professionnels de la défense française et de l'armée de terre, le site krapahute.com c'est aussi le spécialiste du filet de camouflage. Que ce soit pour équiper les chasseurs, les pratiquants du airsoft ou tout simplement les particuliers qui souhaitent habiller leur pergola, vous trouverez tout ce qu'il vous faut à travers un nombre important de filet camouflage de premier choix comme ceux de la marque Miltec.",
+          "texte_p2": "Sac à dos militaire et sac militaire pour vous accompagner sur tous les terrains. Comme tout bon surplus militaire qui se respecte, Krapahute c'est aussi un grand choix de matériel militaire incontournables comme le gilet tactique, la tente militaire ou tout simplement le casque militaire. Besoin d'un insigne militaire ? Krapahute.com vous propose tout un large panel d'insignes en fonction de votre besoin.",
+          "texte_p3": "Du matériel militaire mais pas que… Au delà de l'activité surplus, Krapahute.com vous offre ses services au travers d'un service client de qualité,d'un service après-vente à votre écoute et d'un catalogue de produits très vaste pouvant répondre aux attentes de tout bon aventurier ou krapahuteur adeptes des sorties outdoor comme la randonnée, le camping ou encore le trekking."
+       }
+      }
+  ]
+
+---
+{% extends 'layouts/blank' %}

@@ -1,0 +1,149 @@
+---
+{
+  "name": "Magasin Horaires",
+  "class": "",
+  "icon": "text",
+  "keep_name": true,
+  "keep_icon": true,
+  "settings": [
+    {
+      "label": "Titre",
+      "id": "titre",
+      "type": "text"
+    },
+    {
+      "label": "Nom du Magasin",
+      "id": "magasin_name",
+      "type": "text"
+    },
+    {
+      "label": "Adresse",
+      "id": "magasin_adresse",
+      "type": "text"
+    },
+    {
+      "label": "CP Ville",
+      "id": "magasin_ville",
+      "type": "text"
+    },
+    {
+      "label": "Lundi",
+      "id": "lundi",
+      "type": "text"
+    },
+    {
+      "label": "Mardi",
+      "id": "mardi",
+      "type": "text"
+    },
+    {
+      "label": "Mercredi",
+      "id": "mercredi",
+      "type": "text"
+    },
+    {
+      "label": "Jeudi",
+      "id": "jeudi",
+      "type": "text"
+    },
+    {
+      "label": "Vendredi",
+      "id": "vendredi",
+      "type": "text"
+    },
+    {
+      "label": "Samedi",
+      "id": "samedi",
+      "type": "text"
+    },
+    {
+      "label": "Dimanche",
+      "id": "dimanche",
+      "type": "text"
+    },
+    {
+      "label": "Fermeture Exeptionnelle",
+      "id": "fermeture",
+      "type": "select",
+      "options": [
+        {"label": "Oui","value": "oui"},
+        {"label": "Non","value": "non"}
+      ]
+    },
+    {
+      "label": "Fermeture Exeptionnelle Texte",
+      "id": "fermeture_text",
+      "type": "text",
+      "html": true,
+      "line_break" : true,
+      "nb_rows": 10
+    },
+    {
+      "label": "Couleur de Fond (hexa)",
+      "id": "background",
+      "type": "text"
+    },
+    {
+      "label": "Couleur de Texte (hexa)",
+      "id": "color",
+      "type": "text"
+    }
+  ],
+  "blocks": [],
+  "presets": [{
+    "name": "Magasin Horaires",
+    "category": "Magasin",
+    "settings" :  {
+      "titre" : "Notre Magasin",
+      "magasin_name" : "Au Comptoir du Camouflage",
+      "magasin_adresse" : "Zone industrielle - 2 rue du camp",
+      "magasin_ville" : "51 400 MOURMELON-LE-PETIT",
+      "lundi" : "Fermé",
+      "mardi" : " 14h-19h",
+      "mercredi" : "10h-12h et 14h-19h",
+      "jeudi" : "14h-19h",
+      "vendredi" : "10h-12h et 14h-19h",
+      "samedi" : "10h-19h",
+      "dimanche" : "Fermé",
+      "fermeture" : "oui",
+      "fermeture_text" : "Fermeture le Lundi de Pâques !",
+      "background" : "#809f8e",
+      "color" : "#fff"
+    },
+    "blocks": []
+  }],
+  "default": {
+    "settings" : {},
+    "blocks": []
+  }
+}
+---
+    <div class="container-fluid my-4 my-md-5 acdc_magasin">
+        {% assign next_block = section.blocks[forloop.index] %}
+        <div class="block row m-0 p-0">
+            {% include 'block_debug' %}
+        <div class="text-center text-md-right col-12 col-md-6 col-lg-6">
+          <h3>{{ section.settings.titre}}</h3>
+          <ul class="p-0 list-unstyled">
+            <li>{{ section.settings.magasin_name}}</li>
+            <li>{{ section.settings.magasin_adresse}}</li>
+            <li>{{ section.settings.magasin_ville}}</li>
+          </ul>
+        </div>
+        <div class="text-center text-md-left col-12 col-md-6 col-lg-6">
+          <ul class="p-0 list-unstyled">
+            <li>Lundi : {{section.settings.lundi}}</li>
+            <li>Mardi : {{section.settings.mardi}}</li>
+            <li>Mercredi : {{section.settings.mercredi}}</li>
+            <li>Jeudi : {{section.settings.jeudi}}</li>
+            <li>Vendredi : {{section.settings.vendredi}}</li>
+            <li>Samedi : {{section.settings.samedi}}</li>
+            <li>Dimanche : {{section.settings.dimanche}}</li>
+          </ul>
+        </div>
+        {% if {{section.settings.fermeture}} == "oui" %}
+          <div class="fermeture text-center col-12 p-3" style="background-color:{{section.settings.background}}; color:{{section.settings.color}};">
+            {{section.settings.fermeture_text}}
+          </div>
+        {% endif %}
+    </div>

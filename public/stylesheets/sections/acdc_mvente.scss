@@ -1,0 +1,35 @@
+/*=======================MAGASIN=======================*/
+
+.acdc_mventes {
+  .corps {
+    background-color: white;
+    box-shadow: -2px 0px 4px #000;
+    position: relative;
+  }
+  .block {
+    text-align: center;
+    color: white;
+    box-shadow: -2px 0px 4px #000;
+    position: absolute;
+    top: 2rem;
+    left: -2rem;
+  }
+  .btn {padding: 4px 40px;}
+  .currency-format {color: #809f8e;}
+  .btn-outline-info {color: #809f8e; border-color: #809f8e;}
+  .btn-outline-info:hover {
+    color: white;
+    background-color: #809f8e;
+    border-color: #809f8e;
+  }
+  .titre {font-family: 'Capture', cursive;}
+  .background {background-size: 100% auto;}
+}
+
+@media screen and (max-width: 768px) {
+  #locomotive-section-page-acdc_mventes {
+    .block {position: relative; top: 0; left: 0;}
+  }
+}
+
+/*=======================MAGASIN END=======================*/

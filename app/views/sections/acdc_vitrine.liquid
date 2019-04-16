@@ -1,0 +1,156 @@
+---
+{
+  "name": "Vitrine",
+  "class": "",
+  "icon": "slide",
+  "keep_icon": true,
+  "keep_name": true,
+  "settings": [
+    {
+      "label": "Minimum 5 affiches | Les 5 premières de la liste sont visibles | Changer l’ordre d’affichage : déplacer de bas en haut à l’aide de la souris | Taille des images :  580*739px | Autres info sur : Modules_vitrine",
+      "id": "info_section",
+      "type": "hint"
+    },
+    {
+      "label": "Nom de la vitrine",
+      "id": "section_name",
+      "type": "text"
+    }
+  ],
+  "blocks": [
+    {
+      "name": "Affiche",
+      "type": "cell_text",
+      "keep_icon": true,
+      "keep_name": true,
+      "settings": [
+        {
+          "label": "Texte",
+          "id": "text",
+          "type": "text",
+          "html": true,
+          "nb_rows": 10
+        },
+        {
+          "label": "URL",
+          "id": "url",
+          "type": "text"
+        },
+        {
+          "label": "Nom de l'image",
+          "id": "picture_alt",
+          "type": "text"
+        },
+        {
+          "label": "Image",
+          "id": "picture",
+          "type": "image_picker"
+        }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "Vitrine",
+    "category": "Accueil",
+    "settings" : {
+    },
+    "blocks": [
+      {
+        "type": "cell_text",
+        "settings" : {
+          "text": "Ici votre texte",
+          "url": "Ici votre lien",
+          "picture_alt": "Ici le nom du bloc",
+          "picture": "https://via.placeholder.com/580x739.png?text=ici+votre+image"
+        }
+      },
+      {
+        "type": "cell_text",
+        "settings" : {
+          "text": "Ici votre texte",
+          "url": "Ici votre lien",
+          "picture_alt": "Ici le nom du bloc",
+          "picture": "https://via.placeholder.com/580x739.png?text=ici+votre+image"
+        }
+      },
+      {
+        "type": "cell_text",
+        "settings" : {
+          "text": "Ici votre texte",
+          "url": "Ici votre lien",
+          "picture_alt": "Ici le nom du bloc",
+          "picture": "https://via.placeholder.com/580x739.png?text=ici+votre+image"
+        }
+      },
+      {
+        "type": "cell_text",
+        "settings" : {
+          "text": "Ici votre texte",
+          "url": "Ici votre lien",
+          "picture_alt": "Ici le nom du bloc",
+          "picture": "https://via.placeholder.com/580x739.png?text=ici+votre+image"
+        }
+      },
+      {
+        "type": "cell_text",
+        "settings" : {
+          "text": "Ici votre texte",
+          "url": "Ici votre lien",
+          "picture_alt": "Ici le nom du bloc",
+          "picture": "https://via.placeholder.com/580x739.png?text=ici+votre+image"
+        }
+      }
+    ]
+  }],
+  "default": {
+    "settings" : {
+      "section_name" : "vitrine_accueil"
+    },
+    "blocks": []
+  }
+}
+---
+
+<div class="container-fluid m-0 p-0 d-none d-md-block">
+    <div class="col-12 m-0 p-0">
+        <div class="row m-0 p-0 vitrine">
+          {% for cell in section.blocks %}
+          {% assign next_block = section.blocks[forloop.index] %}
+            {% if forloop.index <= 5 %}
+              <div class="block">
+                {% include 'block_debug' %}
+                <img src="{{cell.settings.picture}}" alt="{{cell.settings.picture_alt}}" class="img-fluid">
+                  <a href="{{cell.settings.url}}"><div class="portail">{{cell.settings.text}}</div></a>
+              </div>
+            {%endif%}
+          {%endfor%}
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid d-block d-md-none">
+  <div class="row text-center" id="slider">
+    <div class="carousel slide" id="carousel-{{section.settings.section_name}}" data-ride="carousel">
+      <div class="carousel-inner">
+        {% for slide in section.blocks %}
+          <div class="{%if forloop.index0 == 0%}active{%endif%} carousel-item">
+            <a href="{{slide.link}}">
+              <img src="{{ slide.settings.picture }}" alt="{{slide.settings.picture_alt}}" class="w-100">
+            </a>
+              <div class="portail">
+                    {{slide.settings.text}}
+              </div>
+          </div>
+        {% endfor %}
+      </div>
+      <a class="carousel-control-prev" href="#carousel-{{section.settings.section_name}}" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carousel-{{section.settings.section_name}}" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+      </a>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,114 @@
+---
+title: Order page
+slug: orders
+handle: account_index
+position: 99
+listed: false
+published: true
+is_layout: false
+seo_title: My sales orders | Shopinvader demo
+---
+{% extends 'layouts/account' %}
+{% block 'body/content/tabcontent' %}
+
+  {% paginate store.sales by 4 %}
+    <div class="row">
+      <div class="col-12">
+      {%if store.sales == null or store.sales.size == 0 %}
+        <div class="text-center">
+          {{ 'account_order_empty' | translate }}
+        </div>
+      {% else %}
+        <div class="text-right">
+          {%include 'paginate' with paginate %}
+        </div>
+        {% for sale in paginate.collection %}
+          <div class="card">
+            <div class="card-header">
+              <div class="row">
+                <div class="col-6 col-sm-4">
+                  <span class="text-primary font-weight-bold">{{sale.name}}</span>
+                  <span class="badge badge-dark ">{{ sale.state }}</span>
+                </div>
+                <div class="col-6 col-sm-4">
+                  {{sale.date   | date:"%d/%m/%Y" }}
+
+                </div>
+                <div class="col-6 col-sm-4">
+                  <div >
+                    <i class="fa fa-map-marker text-primary"></i>
+                    {{ "account_order_address" | translate }}
+                    <button class="btn btn-link dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      {{sale.shipping.address.name}}
+                    </button>
+                    <div class="dropdown-menu p-2 small" aria-labelledby="dropdownMenuButton">
+                      <strong>{{sale.shipping.address.name}}</strong>
+                      <div>{{sale.shipping.address.street}}</div>
+                      <div>{{sale.shipping.address.street2}}</div>
+                      <div>
+                        {{sale.shipping.address.zip}}
+                        {{sale.shipping.address.city}}
+                      </div>
+                      <div>{{sale.shipping.address.country_id.name}}</div>
+                      <div>{{sale.shipping.address.phone}}</div>
+                    </div>
+                  </div>
+                </div>
+                {% if sale.shipping.carrier %}
+                <div class="col-6 col-sm-4">
+                  <i class="fa-li fa fa-truck text-primary"></i>
+                  {{ "account_order_shipping" | translate }}
+                  {{sale.shipping.carrier.name}}
+                  {% for track in sale.shipping.tracking %}
+                    <div>
+                      <a href="{{track.url}}">
+                        {{"account_order_tracking" | translate }} {{track.value}}
+                      </a>
+                    </div>
+                  {% endfor %}
+                </div>
+                {% endif %}
+                <div class="col">
+                  <div class="font-weight-bold">
+                    {% include 'currency' | value: sale.amount.total %}
+                    <div class="small">
+                      {{ 'account_order_shipping' | translate }}
+                      {% include 'currency' | value: sale.shipping.amount.total %}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+            {% for line in sale.lines.items %}
+              <div class="row border border-top-0 border-left-0 border-right-0 pb-4">
+                <div class="col-4 col-sm-2">
+                  <img src="{{line.product.images.first.small.src}}" alt="{{order_line.product.images.first.small.alt }}" class="img-fluid"/>
+                </div>
+                <div class="col-8 col-sm-10">
+                  <a href="{{line.product.url_key | prepend: url_base }}" target="_blank">{{line.product.name}}</a>
+                  <div class="small">
+                    {{ 'account_order_qty' | translate }}
+                    <b>{{line.qty | round}}</b>
+                  </div>
+                  <div class="small">
+                    {{ 'account_order_subtotal' | translate }}
+                    <b>{% include 'currency' | value: line.amount.total %}</b>
+                  </div>
+                </div>
+
+              </div>
+
+            {% endfor%}
+            </div>
+          </div>
+        {% endfor %}
+        <div class="text-right">
+          {%include 'paginate' with paginate %}
+        </div>
+
+      {% endif %}
+      </div>
+    </div>
+  {% endpaginate %}
+{% endblock %}

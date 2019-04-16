@@ -1,0 +1,60 @@
+---
+title: Account
+handle: account
+slug: account
+seo_title: My account | Shopinvader demo
+is_layout: false
+sections_content: >
+  {
+    "account_login": {
+      "settings": {
+        "cells_align": "center",
+        "cells_margin": "lg",
+        "cells_direction": "row",
+        "header_content": "<h1>Welcome</h1>"
+      },
+      "blocks": [
+        {
+          "type": "card_login",
+          "settings": {
+            "cell_size": "md",
+            "display_border": false,
+            "display_shadow": false,
+            "title": "<h2>Sign In</h2>",
+            "btn_label": "SIGN IN",
+            "theme": "none",
+            "target_url": "account/orders",
+            "reset_url": "reset-password-request"
+          }
+        },
+        {
+          "type": "card_register",
+          "settings": {
+            "cell_size": "md",
+            "display_border": false,
+            "display_shadow": false,
+            "title": "<h2>New to shopinvader demo ? </h2>",
+            "content": "Do more with an account<ul><li>Check out faster</li><li>Save your shipping addresses</li><li>Keep track of your orders</li></ul>",
+            "btn_label": "CREATE AN ACCOUNT ",
+            "theme": "light",
+            "target_url": "account/register"
+          }
+        }
+      ]
+    }
+  }
+---
+{% extends 'layouts/default' %}
+{% block "body/content" %}
+  {% action 'Redirection when customer is already logged' %}
+  if (getProp('current_customer')) {
+    redirectTo('account_index');
+  }
+  {% endaction %}
+  <div class="pt-2 pb-2">
+    {% section 'account_login' %}
+  </div>
+  <div class="pt-2 pb-2">
+    {% sections_dropzone %}
+  </div>
+{% endblock %}

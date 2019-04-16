@@ -1,0 +1,45 @@
+/*=======================VITRINE=======================*/
+.vitrine {
+  width: calc(100vw + 2*80px);
+  overflow: hidden;
+  white-space:nowrap;
+  .block {
+    position: relative;
+    width: calc(20vw + 80px);
+    margin-left: 0;
+    margin-right: -80px;
+    box-shadow: -2px 0px 4px #000;
+    white-space: normal;
+    transition-property: margin-right;
+    transition-duration: 1s;
+    transition-delay: 0s;
+    &:last-child {transition-property: margin-left; transition-duration: 1s; margin-right: -40px;}
+    &:last-child:hover {margin-left: -80px;}
+  }
+  .block:hover {
+    margin-right: 0%;
+    .portail {
+      left: calc(10% + 40px);
+    }
+  }
+}
+.portail {
+  position: absolute;
+  height: auto;
+  min-height: 72px;
+  width: calc(80% - 80px);
+  left: calc(10%);
+  bottom: 40px;
+  padding: 10px;
+  background-color: $color-acdcdark;
+  box-shadow: 0px 0px 8px #000;
+  border-radius: 6px;
+  text-align: center;
+  color: white;
+  transition-property: left;
+  transition-duration: 1s;
+  transition-delay: 0s;
+  p {margin: 0;}
+}
+#slider .portail {width: calc(80%);}
+/*=======================END VITRINE=======================*/

@@ -1,0 +1,26 @@
+---
+title: Account profile
+handle: account_profil
+slug: account-profile
+seo_title: My account profile | Shopinvader demo
+---
+{% extends 'layouts/account '%}
+
+{% block 'body/content/tabcontent' %}
+  {% with_scope address_type: "profile"%}
+    {% assign profile = store.addresses.first %}
+    <div class="card">
+      <h2 class="card-header bg-primary text-light"><i class="fas fa-user"></i>  {{'account_profil_title' | translate}}</h2>
+      <div class="card-body">
+        <form action="/invader/addresses/{{profile.id | round}}/update" method="post" data-autocomplete="address">
+          <input type="hidden" name="invader_success_url" value="{% path_to page %}" />
+          <input type="hidden" name="invader_error_url" value="{% path_to page %}" />
+          {% include 'address_form' with address: profile %}
+          <div class="text-right">
+            <input type="submit" name="submit" class="btn btn-primary " value="{{'account_address_submit' | translate}}">
+          </div>
+        </form>
+      </div>
+    </div>
+  {% endwith_scope%}
+{% endblock %}

@@ -1,0 +1,252 @@
+---
+{
+  "name": "Footer",
+  "class": "",
+  "icon": "footer",
+  "keep_name": true,
+  "keep_icon": true,
+  "id": "acdc_footer",
+  "keep_icon": true,
+  "settings": [
+    {
+      "label": "Informations",
+      "id": "footer_info",
+      "type": "text"
+    },
+    {
+      "label": "Nombre de Widgets",
+      "id": "nb_widget",
+      "type": "select",
+      "options": [
+        {"label": "1","value": "1"},
+        {"label": "2","value": "2"},
+        {"label": "3", "value": "3"}
+      ]
+    }
+  ],
+  "blocks": [
+    {
+      "name": "Text",
+      "type": "cell_text",
+      "keep_icon": true,
+      "keep_name": true,
+      "settings": [
+        {
+          "label": "identifiant (uniquement des lettres en minuscule et sans espace)",
+          "id": "widget_id",
+          "type": "text"
+        },
+        {
+          "label": "Titre",
+          "id": "widget_titre",
+          "type": "text"
+        },
+        {
+          "label": "Content",
+          "id": "content",
+          "type": "text",
+          "html": true,
+          "nb_rows": 10
+        }
+      ]
+    },
+    {
+      "name": "Image",
+      "type": "cell_image",
+      "keep_icon": true,
+      "keep_name": true,
+      "settings": [
+        {
+          "label": "Mettre l'image dans le parent",
+          "id": "is_child",
+          "type": "checkbox"
+        },
+        {
+          "label": "Image*",
+          "id": "picture",
+          "type": "image_picker"
+        },
+        {
+          "label": "Nom de l'image*",
+          "id": "picture_alt",
+          "type": "text"
+        },
+        {
+          "label": "Lien",
+          "id": "picture_url",
+          "type": "text"
+        },
+        {
+          "label": "Texte",
+          "id": "content",
+          "type": "text",
+          "html": true,
+          "nb_rows": 10
+        }
+      ]
+    }
+  ],
+  "default": {
+    "settings" : {
+      "nb_widget": "3",
+      "footer_info": "© Copyright 2014 Krapahute.com | SHOPINVADER"
+    },
+    "blocks": [
+      {
+        "type": "cell_text",
+        "settings" : {
+          "widget_id" : "connaitre",
+          "widget_titre" : "Mieux nous connaitre",
+          "content":  "Mettre les liens ici"
+        }
+      },
+      {
+        "type": "cell_text",
+        "settings" : {
+          "widget_id" : "aide",
+          "widget_titre" : "Aide",
+          "content":  "Mettre les liens ici"
+        }
+      },
+      {
+        "type": "cell_text",
+        "settings" : {
+          "widget_id" : "suivre",
+          "widget_titre" : "Suivez-Nous",
+          "content":  ""
+        }
+      },
+      {
+        "type": "cell_image",
+        "settings" : {
+          "picture_alt" : "pictogramme facebook",
+          "picture": "images/footer_facebook.svg",
+          "picture_url":  "http://www.krapahute.com/",
+          "is_child": true
+        }
+      },
+      {
+        "type": "cell_image",
+        "settings" : {
+          "picture_alt" : "pictogramme youtube",
+          "picture": "images/footer_youtube.svg",
+          "picture_url":  "http://www.krapahute.com/",
+          "is_child": true
+        }
+      },
+      {
+        "type": "cell_image",
+        "settings" : {
+          "picture_alt" : "pictogramme instagram",
+          "picture": "images/footer_insta.svg",
+          "picture_url":  "http://www.krapahute.com/",
+          "is_child": true
+        }
+      },
+      {
+        "type": "cell_image",
+        "settings" : {
+          "picture_alt" : "pictogramme tripadvisor",
+          "picture": "images/footer_tripadvisor.svg",
+          "picture_url":  "http://www.krapahute.com/",
+          "is_child": true
+        }
+      }
+    ]
+  }
+}
+---
+
+{% assign has_child = false %}
+<div class="container-fluid">
+  <div class="row {{css_banner}}">
+
+    <div class="col-12">
+      <div class="container">
+        <div class="row d-none d-md-flex">
+          {% for cell in section.blocks %}
+            {% assign next_block = section.blocks[forloop.index] %}
+              {% if cell.type == "cell_text" %}
+                {% case section.settings.nb_widget %}
+                {% when "1" %}
+                {% assign css_nb_widget = "col-12 col-sm-12 col-lg-12" %}
+                {% when "2" %}
+                {% assign css_nb_widget = "col-12 col-sm-6 col-lg-6" %}
+                {% when "3" %}
+                {% assign css_nb_widget = "col-12 col-sm-12 col-lg-4" %}
+                {% endcase %}
+                <div class="block widget {{css_nb_widget}}">
+                <h3 class="my-4">{{cell.settings.widget_titre}}</h3>
+              {% else %}
+                <div class="block image">
+              {% endif %}
+
+              {% include 'block_debug' %}
+              {% if cell.type == "cell_image" %}
+                <a href="{{cell.settings.picture_url}}">
+                  <img src="{{cell.settings.picture}}" alt="{{cell.settings.picture_alt}}" class="img-fluid">
+                </a>
+                {{ cell.settings.content }}
+              {% else %}
+                 {{ cell.settings.content }}
+              {% endif %}
+
+            {% if next_block.settings.is_child == true %}
+              {% if has_child ==  false%}
+                {% assign has_child = true %}
+                <div class="row subchild">
+              {% else %}
+                </div>
+              {% endif %}
+            {% else %}
+              {% if has_child ==  true%}
+                {% assign has_child = false %}
+                  </div>
+                </div>
+              {% endif %}
+              </div>
+            {% endif %}
+          {%endfor%}
+        </div>
+        <div class="row d-block d-md-none">
+          {% for cell in section.blocks %}
+          {% assign next_block = section.blocks[forloop.index] %}
+            {% if cell.type == "cell_text" %}
+              <div class="block widget">
+                <h3 data-toggle="collapse" data-target="#{{cell.settings.widget_id}}" aria-expanded="false" aria-controls="{{cell.settings.widget_id}}" class="my-4">{{cell.settings.widget_titre}}</h3>
+            {% else %}
+              <div class="block image">
+            {% endif %}
+               {% if cell.type == "cell_image" %}
+                  <a href="{{cell.settings.picture_url}}"><img src="{{cell.settings.picture}}" alt="{{cell.settings.picture_alt}}" class="img-fluid"></a>
+                  {{ cell.settings.content }}
+               {% else %}
+                  <div class="collapse" id="{{cell.settings.widget_id}}">{{ cell.settings.content }}</div>
+               {% endif %}
+                  {% if next_block.settings.is_child == true %}
+                          {% if has_child ==  false%}
+                            {% assign has_child = true %}
+                            <div class="row subchild">
+                          {% else %}
+                    </div>
+                          {% endif %}
+
+                  {% else %}
+                    {% if has_child ==  true%}
+                      {% assign has_child = false %}
+              </div>
+            </div>
+                    {% endif %}
+               </div>
+              {% endif %}
+          {%endfor%}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="col-12 info">{{section.settings.footer_info}}</div>
+
+
+

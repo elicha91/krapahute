@@ -1,0 +1,212 @@
+{% if site.metafields.payment.adyen_url %}
+  <div>
+    <p>
+      {{payment_method.description}}
+    </p>
+    <button type="button" class="btn btn-dark btn-lg font-weight-bold text-uppercase"  data-toggle="modal" data-target="#modal-adyen">
+      {{ 'payment_adyen_button' | translate }}
+    </button>
+    <div class="pt-3">
+      {{ 'payment_adyen_description' | translate }}
+      <div class=" text-secondary fa-2x">
+        <i class="fab fa-cc-visa"></i>
+        <i class="fab fa-cc-mastercard"></i>
+        <i class="fab fa-cc-amex"></i>
+        <i class="fas fa-credit-card"></i>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade modal-payment adyen-popup" id="modal-adyen" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content text-left">
+        <div class="modal-header">
+          <h4 class="modal-title">
+            <i class="fa fa-credit-card-alt"></i>
+            {{ 'payment_adyen_form_title' | translate }}
+          </h4>
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        </div>
+        <div class="modal-body" id="adyen-popup-body" data-shopinvader-container>
+          <div class="text-center modal-loader">
+            <div class="spinner"></div>
+          </div>
+          <form action="" method="post" id="adyen-3ds-form" class="d-none">
+            <input type="hidden" name="PaReq" value="" />
+            <input type="hidden" name="MD" value="" />
+            <input type="hidden" name="TermUrl" value="" />
+
+          </form>
+          <form action="" method="post" id="adyen-encrypted-form" >
+            <input type="hidden" value="" data-encrypted-name="generationtime" />
+            <h3 class="d-none d-md-block">
+              {{ 'payment_adyen_form_subtitle' | translate }}
+            </h3>
+            <p>
+              {{ 'payment_adyen_description' | translate }}
+            </p>
+            <div class="payment-card-row">
+              <div class="form-group">
+                <label for="creditcard-owner">{{'creditcard_lastname' | translate}}</label>
+                <input type="text" class="form-control" id="creditcard-owner" placeholder="{{'creditcard_lastname' | translate}}" data-encrypted-name="holderName">
+              </div>
+              <div class="row form-group">
+                <div class="col-12 col-sm-7 col-lg-7">
+                  <label ><i class="fa fa-credit-card text-primary" id="card-icon" ></i> {{'creditcard_number' | translate}}</label>
+                  <input type="text" size="20" autocomplete="off" data-encrypted-name="number" id="card-number" class="form-control" placeholder="{{'creditcard_number' | translate}}" />
+                </div>
+                <div class="col-12 col-sm-5 col-lg-5">
+                  <label ><i class="fa fa-calendar-o text-primary"></i>  {{'creditcard_expiry' | translate}}</label>
+                  <div class="d-flex">
+                    <div class="w-50 pr-2">
+                      <select class="form-control" autocomplete="off" data-encrypted-name="expiryMonth" id="card-expiry-month" class="form-control">
+                        {% for month in (1..12) %}
+                        <option value="{{month}}">{{month}}</option>
+                        {% endfor %}
+                      </select>
+                    </div>
+                    <div class="w-50">
+                      {% assign current_year =  now | date: "%Y" %}
+                      {% assign last_year =  current_year | plus: 10 %}
+                      <select class="form-control" autocomplete="off" data-encrypted-name="expiryYear" id="card-expiry-year" class="form-control">
+                        {% for month in (current_year..last_year) %}
+                        <option value="{{month}}">{{month}}</option>
+                        {% endfor %}
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row form-group">
+                <label for="exampleInputEmail1" class="col-12">
+                  <i class="fa fa-lock text-primary"></i>  {{'creditcard_cvc' | translate}}
+                </label>
+                <div class="col-6">
+                  <input type="text" id="card-cvc" class="form-control w-100" size="4" maxlength="4" autocomplete="off" data-encrypted-name="cvc" />
+                </div>
+                <small id="passwordHelpInline" class="text-muted col-6">
+                  {{'creditcard_cvc_help' | translate}}
+                </small>
+              </div>
+              <div class="form-group text-center">
+                <button type="submit" class="btn btn-success w-75" id="" placeholder="" disabled="disabled">
+                  {{'payment_adyen_ckeckout_button' | translate}} 
+                  <span id="payement_total_label" data-shopinvader-container>
+                    {% include 'currency' | value: amount %}
+                  </span>
+                </button>
+                <div id="card-errors" class="text-danger pt-2" role="alert"></div>
+              </div>
+              <div class="text-center text-large text-secondary">
+                <i class="fab fa-cc-visa"></i>
+                <i class="fab fa-cc-mastercard"></i>
+                <i class="fab fa-cc-amex"></i>
+                <i class="fab fa-credit-card-alt"></i>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer bg-light text-dark">
+          <div class="text-left w-50">
+            <i class="fa fa-lock text-success"></i>
+            {{'creditcard_cvc_help' | translate}}
+            <p>{{'payment_adyen_security_details'}}</p>
+          </div>
+          <div class="w-50 text-right">
+            <i class="logo-adyen"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="{{site.metafields.payment.adyen_url}}"></script>
+  <script type="text/javascript">
+    window.addEventListener("load", function() {
+      $('#modal-adyen').on('shown.bs.modal', function (e) {
+       init_adyen_form();
+      });
+    },false);
+    function init_adyen_form() {
+      var $adyen_form = $('#adyen-encrypted-form');
+      var encrypted_field = "encrypted_field";
+      var current_date = new Date();
+      $adyen_form.find('[data-encrypted-name="generationtime"]').val(current_date.toISOString());
+      var options = {};
+
+      options.name = encrypted_field;
+      options.onsubmit = function(e) {
+          $('#modal-adyen #adyen-encrypted-form').css('opacity', 0);
+          $('#modal-adyen .modal-loader').show();
+          $('#card-errors').html('');
+          $.ajax({
+            url: "{{action}}",
+            method: 'POST',
+            dataType: 'json',
+            contentType: 'application/json',
+
+            data: JSON.stringify({
+              'payment_mode': {
+                'id': "{{payment_method.id}}"
+              },
+              'adyen': {
+                "token" : $adyen_form.find('#'+encrypted_field).val(),
+                "redirect_success_url" : "{% path_to cart_end %}",
+                "redirect_cancel_url" : "{% path_to page %}"
+              }
+            }),
+            success: function(cart) {
+              var error = true;
+              console.log('cart', cart);
+              if(cart != null) {
+                if(cart.payment.hasOwnProperty('adyen_params')) {
+                  var adyen_params = cart.payment.adyen_params;
+                  $3ds_form = $('#adyen-3ds-form');
+                  error = false;
+
+                  if($3ds_form) {
+                    //With 3D Secure Payment
+                    $3ds_form.attr('action', adyen_params.IssuerUrl);
+                    $3ds_form.find('[name=PaReq]').val(adyen_params.PaReq);
+                    $3ds_form.find('[name=MD]').val(adyen_params.MD);
+                    $3ds_form.find('[name=TermUrl]').val(adyen_params.TermUrl);
+                    $3ds_form.submit();
+                  }
+
+                }
+                else {
+                  error = false;
+                  //Without 3D Secure
+                  window.location = "{% path_to cart_end %}";
+                }
+              }
+              if(error == true) {
+                $('#modal-adyen').modal('hide');
+                $('#generic-error-message').modal('show');
+              }
+            },
+            error: function(reponse) {
+              console.log('recieved error response', response);
+              if(reponse.hasOwnProperty('responseJSON')) {
+                $('#card-errors').html(reponse.responseJSON.description);
+                $('#modal-adyen #adyen-encrypted-form').css('opacity', 1);
+                $('#modal-adyen .modal-loader').hide();
+              }
+              else {
+                console.log(reponse);
+                $('#modal-adyen').modal('hide');
+                $('#generic-error-message').modal('show');
+              }
+            }
+          });
+          e.preventDefault();
+      };
+
+      // Bind encryption options to the form.
+      adyen.createEncryptedForm($adyen_form[0], options);
+    }
+  </script>
+{%else%}
+  <div class="alert alert-warning">
+    Payment with Adyen not available.
+  </div>
+{%endif%}

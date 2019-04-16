@@ -1,0 +1,31 @@
+/*=======================INFO=======================*/
+.acdc_info {
+  display: flex;
+  vertical-align: top;
+  .block {
+    max-width: 180px;
+    margin: 0 auto;
+    text-align: center;
+    .picto {
+      margin: 1vw;
+      padding: 0.1px;
+      border-radius: 100%;
+      .sous_picto {
+        background-color: transparent;
+        border-radius: 100%;
+        margin: 0;
+        padding: 2vw;
+        border: calc(2px + 0.3vw) solid transparent;
+        transition-property: border, padding, margin;
+        transition-duration: 0.5s;
+        transition-delay: 0s;
+      }
+    }
+  }
+  .picto:hover .sous_picto {
+    margin: 1vw;
+    padding: 1vw;
+    border: calc(2px + 0.3vw) solid white;
+  }
+}
+/*=======================END INFO=======================*/

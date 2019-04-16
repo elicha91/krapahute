@@ -1,0 +1,29 @@
+---
+title: Default layout
+is_layout: false
+---
+
+{% extends 'layouts/base' %}
+{% block 'body' %}
+  <header>
+    {% block header %}
+      {% global_section 'header', id:'page_header',  placement: 'top'%}
+    {% endblock %}
+  </header>
+  <div class="page shadow">
+    <main>
+      <div class="container-fluid">
+        {% include 'store_notifications' %}
+      {% block content %}
+      {% endblock %}
+    </main>
+    {% block footer %}
+        <div class="footer mt-5 pt-5">
+          <img class="imgfooter" src="{{ 'footer_footer.svg' | theme_image_url }}" alt="image footer">
+          <div class="acdcfooter pt-4">
+            {% global_section 'acdc_footer',   id:'acdc_footer', placement:'bottom' %}
+          </div>
+        </div>
+    {% endblock %}
+  </div>
+{% endblock %}

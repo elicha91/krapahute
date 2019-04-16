@@ -1,0 +1,119 @@
+{% assign variant_path = '?ref=' | append: product.sku %}
+{% if with_richdata == true%}
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org/",
+      "@type": "Product",
+      "name": {{product.model.name  | json}},
+      "url": "{{product.url_key  | prepend: url_base }}?ref={{product.sku}}",
+      "image": [
+        "{{image.first.medium.src}}"
+       ],
+      "sku": {{product.sku | json}},
+      "offers": {
+        "@type": "Offer",
+        "priceCurrency": "EUR",
+        "price": "{{product.price.value}}"
+      }
+    }
+  </script>
+{% endif%}
+<div class="card product-thumbnail  bg-white m-0 h-100 pb-1 {%if display_horizontal == true%}product-thumbnail-horizontal{%elsif display_lite == true%}product-thumbnail-lite{%endif%}" >
+  <div class="product-thumbnail-img loader">
+    <div class="loader-icon"></div>
+    <img class="group list-group-image card-img-top pr-2 pr-md-0"
+    src="{{product.images.first.medium.src  | default: site.metafields.theme.noimage }}"
+    alt="{{product.images.first.medium.alt}}"
+    data-link="{{product.url_key  | prepend: url_base }}?ref={{product.sku}}"/>
+    {%if product.price.discount > 0%}
+    <div class="pb-1">
+      <div class="badge badge-warning p-2 badge-discount">
+        {{'product_discount_label' | translate}} <b>  -{{product.price.discount | round }} %</b>
+      </div>
+    </div>
+    {%endif%}
+  </div>
+  <div class="product-thumbnail-price card-body p-0 p-md-3 p-xl-2" data-link="{{product.url_key  | prepend: url_base }}?ref={{product.sku}}">
+    <div class="d-vertical-only">
+      <span class="small">
+        <small>{{ 'product_price_from' | translate }}</small>
+      </span>
+      <strong class="h5">
+        <span class="font-weight-bold {% if product.price.discount > 0%}text-warning{% else %}text-dark{% endif %}">
+          {% include 'currency' | value: product.price.value %}
+        </span>
+        {% if product.price.discount > 0 %}
+          <span class="text-dark small">
+            <s>{% include 'currency' | value: product.price.original_value %}</s>
+          </span>
+        {% endif %}
+      </strong>
+    </div>
+    <div class="d-horizontal-only">
+      <span class="small">
+        <small>{{'product_price_from' | translate}} </small>
+      </span>
+      <strong class="product-price-value">
+        <span class="font-weight-bold {%if product.price.discount > 0%}text-warning {%else%}text-dark{% endif %}">
+          {% include 'currency' | value: product.price.value %}
+        </span>
+        {%if product.price.discount > 0%}
+          <span class="text-dark small">
+            <s>{% include 'currency' | value: product.price.original_value %}</s>
+          </span>
+        {% endif %}
+      </strong>
+      <form method="POST" action="/invader/cart/add_item" method="post" data-shopinvader-form>
+        <input type="hidden" name="invader_success_url" value="{%path_to page%}?ref={{product.sku}}&addtocart_product_id={{product.objectID}}" />
+        <input type="hidden" name="invader_error_url" value="{%path_to page%}?ref={{product.sku}}" />
+        <input type="hidden" name="item_qty" value="1">
+        <input type="hidden" name="product_id" value="{{product.objectID }}">
+        <button type="submit" name="button" class="btn btn-primary btn-block product-add-to-cart ">
+          <i class="fa fa-shopping-basket"></i> {{'product_add_to_cart' | translate}}
+        </button>
+      </form>
+    </div>
+  </div>
+  <div class="product-thumbnail-name card-body p-1 p-sm-3 p-xl-2">
+    <div class="font-weight-bold">
+      <a href="{{product.url_key  | prepend: url_base }}?ref={{product.sku}}" class="card-title">
+        {{product.name}}
+
+      </a>
+    </div>
+    <a href="{{product.url_key  | prepend: url_base }}?ref={{product.sku}}#product-section-reviews" class="small">
+    {%if product.rating.summary.size > 0 %}
+      {% include 'rating_stars'
+         with rating_value: product.rating.summary.average
+      %}
+    {% endif%}
+    </a>
+    <div class="card-text">
+      <a href="{{product.categories.last.url_key  | prepend: url_base }}" class="text-dark"><u>{{product.categories.last.name}}</u></a>
+      
+    </div>
+    {% if product.variant_count > 0%}
+    <div class="pt-2 pb-2">
+      <a href="{{product.url_key  | prepend: url_base }}?ref={{product.sku}}" class="badge badge-secondary p-1">
+        {{'product_variants' | translate}}
+      </a>
+    </div>
+    {% endif%}
+    <div class="small d-horizontal-only">
+      <div class="product-short-description">
+        {{product.short_description}}
+      </div>
+    </div>
+  </div>
+  <div class="product-thumbnail-btn d-vertical-only pr-2 pl-2">
+    <form method="POST" action="/invader/cart/add_item" method="post" data-shopinvader-form>
+      <input type="hidden" name="invader_success_url" value="{%path_to page%}?ref={{product.sku}}&addtocart_product_id={{product.objectID}}" />
+      <input type="hidden" name="invader_error_url" value="{%path_to page%}?ref={{product.sku}}" />
+      <input type="hidden" name="item_qty" value="1">
+      <input type="hidden" name="product_id" value="{{product.objectID }}">
+      <button type="submit" name="button" class="btn btn-primary btn-block product-add-to-cart ">
+        <i class="fa fa-shopping-basket"></i> {{'product_add_to_cart' | translate}}
+      </button>
+    </form>
+  </div>
+</div>

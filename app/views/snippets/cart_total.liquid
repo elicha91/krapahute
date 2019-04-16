@@ -1,0 +1,50 @@
+
+<div class="">
+  <div class="">
+    <h2 class="display-4 text-uppercase d-none d-md-block">{{'cart_total_total' | translate}}</h2>
+    <table class="table">
+      <tbody>
+        <tr>
+          <td class="font-weight-bold border-0">
+            {{'cart_total_subtotal' | translate }}
+          </td>
+          <td class="font-weight-bold text-right border-0">
+            {% include 'currency' | value: cart.lines.amount.total %}
+          </td>
+        </tr>
+        {% if cart.shipping.selected_carrier.id != null%}
+        <tr>
+          <td class="">
+            {{'cart_total_shipping' | translate }}
+            <div class="small">
+              {{ cart.shipping.selected_carrier.name }}
+            </div>
+          </td>
+          <td class="text-right">
+            {% include 'currency' | value: cart.shipping.amount.total %}
+          </td>
+        </tr>
+
+        {%endif%}
+        <tr>
+          <td class="">
+            <div class="h3 font-weight-bold  ">
+              {{'cart_total_total' | translate }}
+            </div>
+            <div class="">
+              {{'cart_total_vat' | translate }}
+            </div>
+          </td>
+          <td class="text-right">
+            <div class="h3 text-primary font-weight-bold ">
+              {% include 'currency' | value: cart.amount.total %}
+            </div>
+            <div class="">
+              {% include 'currency' | value: cart.amount.tax %}
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
